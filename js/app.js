@@ -1,4 +1,4 @@
-/* Hafspot — UI wiring. Vanilla JS, no build step. Pantry persists in localStorage. */
+/* Fuchsia — UI wiring. Vanilla JS, no build step. Pantry persists in localStorage. */
 (function () {
   var HAF = window.HAF;
   var STORE = "hafspot.pantry.v1";

@@ -1,4 +1,4 @@
-/* Hafspot — fuchsia-forward kitchen-coach identity.
+/* Fuchsia — fuchsia-forward kitchen-coach identity.
    Display: Fraunces (warm, wonky, cookbook-editorial). Body: Inter.
    The four elements are color-coded, with Heat = fuchsia so the hero color IS the H. */
 
@@ -63,9 +63,8 @@ body {
 .brand__mark { display: grid; place-items: center; }
 .brand__word {
   font-family: var(--display); font-weight: 900; font-size: 26px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02em; color: var(--fuchsia);
 }
-.brand__word::first-letter { color: var(--fuchsia); }
 .topbar__right { display: flex; align-items: center; gap: 16px; }
 .elements-legend {
   font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
@@ -272,8 +271,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
 }
 .foot__lockup { font-family: var(--display); font-size: 18px; margin: 0 0 6px; }
 .foot__lockup b { color: var(--fuchsia); }
-.foot__note { font-size: 13.5px; color: var(--muted); margin: 0; max-width: 60ch; }
+.foot__note { font-size: 13.5px; color: var(--muted); margin: 0; max-width: 62ch; }
 .foot__note b { color: var(--ink); }
+.foot__word { font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: 0.01em; color: var(--ink); }
+.foot__note .fx { color: var(--fuchsia); font-weight: 800; }
 
 /* ——— Responsive ——— */
 @media (max-width: 820px) {

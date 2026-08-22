@@ -1,20 +1,21 @@
-# Hafspot 🐹
+# Fuchsia 🌸
 
 **Cook what you have. Waste nothing.**
 
-Hafspot is a Salt · Fat · Acid · Heat improvisation coach for using up food. Tell it
+Fuchsia is a Salt · Fat · Acid · Heat improvisation coach for using up food. Tell it
 what's about to go off, and it hands you **one balanced meal** plus the exact salt,
 fat, acid, and heat moves to make it taste finished — no recipe required.
 
 It's the "eat the fridge before it dies" app, built on a chef's mental model instead
-of a recipe database. FridgeSmart tracks inventory and matches recipes; Hafspot teaches
+of a recipe database. FridgeSmart tracks inventory and matches recipes; Fuchsia teaches
 you to *improvise* from what's on hand, so pragmatists save money and food, and quietly
 become better cooks.
 
 ## The name
 
-**HAFS + pot** — **H**eat · **A**cid · **F**at · **S**alt, in a pot. It also reads as
-*have-spot*: the spot for what you already **have**.
+The four elements are hiding in the word itself: **f**u**c**·**h**·**s**·i·**a** carries
+**F**at, **H**eat, **S**alt and **A**cid — the four elements of good cooking, in one color.
+The name *is* the method, and it *is* the brand color.
 
 ## How it works
 
@@ -55,7 +56,8 @@ python3 -m http.server 8123 --directory .
 
 ## Brand
 
-- **Name:** Hafspot (encodes the four elements + "what you have")
+- **Name:** Fuchsia — the four SFAH letters live inside the word (f‑u‑**c**‑**h**‑**s**‑i‑**a**), and the name is the hero color
 - **Mascot:** a cheek-stuffing hamster — nature's anti-waste animal
 - **Hero color:** fuchsia `#e01a79`, mapped to Heat across the UI
 - **Type:** Fraunces (display) + Inter (body)
+- **Repo:** `saltfatacidheat` (kept as the descriptive slug; display name is Fuchsia)

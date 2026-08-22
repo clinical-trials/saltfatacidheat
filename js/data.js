@@ -1,4 +1,4 @@
-/* Hafspot — knowledge base
+/* Fuchsia — knowledge base
  * The four elements: Salt · Fat · Acid · Heat (Samin Nosrat's "Salt, Fat, Acid, Heat").
  * Salt/Fat/Acid are carried by ingredients (0–2 strength). Heat is a technique the dish supplies.
  *

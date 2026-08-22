@@ -1,4 +1,4 @@
-/* Hafspot — the coaching engine.
+/* Fuchsia — the coaching engine.
  * Deterministic, rules-based. Classifies what you have by the four elements + plate role,
  * scores dish shapes by fit and by how much about-to-spoil food they use, then writes the
  * Salt / Fat / Acid / Heat moves to pull it together. No recipes required.
