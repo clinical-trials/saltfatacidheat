@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hafspot — cook what you have</title>
+  <meta name="description" content="Tell Hafspot what's about to go off. Get one balanced meal and the salt, fat, acid and heat moves to make it sing. Waste nothing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e01a79'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='white'%3E🐹%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Hafspot home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <ellipse cx="14" cy="40" rx="10" ry="9" fill="var(--fuchsia-soft)"/>
+          <ellipse cx="50" cy="40" rx="10" ry="9" fill="var(--fuchsia-soft)"/>
+          <circle cx="20" cy="22" r="7" fill="var(--caramel)"/>
+          <circle cx="44" cy="22" r="7" fill="var(--caramel)"/>
+          <circle cx="20" cy="22" r="3" fill="var(--fuchsia-soft)"/>
+          <circle cx="44" cy="22" r="3" fill="var(--fuchsia-soft)"/>
+          <path d="M32 12c-13 0-22 9-22 24 0 12 9 20 22 20s22-8 22-20c0-15-9-24-22-24z" fill="var(--caramel)"/>
+          <circle cx="23" cy="34" r="2.6" fill="#2a0a1e"/>
+          <circle cx="41" cy="34" r="2.6" fill="#2a0a1e"/>
+          <path d="M28 41c1.6 2 6.4 2 8 0" fill="none" stroke="#2a0a1e" stroke-width="2" stroke-linecap="round"/>
+          <path d="M32 37l-2.4 2.6h4.8z" fill="#2a0a1e"/>
+        </svg>
+      </span>
+      <span class="brand__word">Hafspot</span>
+    </a>
+    <div class="topbar__right">
+      <span class="elements-legend" aria-hidden="true">
+        <b style="color:var(--salt)">Salt</b><i>·</i><b style="color:var(--fat)">Fat</b><i>·</i><b style="color:var(--acid)">Acid</b><i>·</i><b style="color:var(--heat)">Heat</b>
+      </span>
+      <button id="themeToggle" class="ghost-btn" type="button" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Salt · Fat · Acid · Heat, minus the waste</p>
+      <h1 class="hero__title">Cook what<br>you <span class="mark-underline">have.</span></h1>
+      <p class="hero__sub">Tell Hafspot what's about to go off. It gives you one balanced meal — and the exact salt, fat, acid and heat moves to make it taste finished. No recipe. Nothing wasted.</p>
+    </section>
+
+    <section class="workbench">
+      <!-- LEFT: input -->
+      <div class="panel panel--input">
+        <label class="field-label" for="ingredientInput">What's in the fridge?</label>
+        <div class="entry">
+          <input id="ingredientInput" type="text" autocomplete="off" placeholder="wilting spinach, half a lemon, leftover rice…" aria-describedby="entryHint" />
+          <button id="addBtn" class="add-btn" type="button">Add</button>
+          <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+        </div>
+        <p id="entryHint" class="hint">Add a few things — especially whatever's on its last day. Tap the 🔥 on a chip to mark it <em>use first</em>.</p>
+
+        <div id="pantry" class="pantry" aria-live="polite"></div>
+
+        <div class="actions">
+          <button id="coachBtn" class="cta" type="button">Coach me</button>
+          <button id="clearBtn" class="link-btn" type="button" hidden>Clear</button>
+        </div>
+
+        <details class="quickadd" id="quickAdd">
+          <summary>Or tap from the usual suspects</summary>
+          <div id="quickAddGroups" class="quickadd__groups"></div>
+        </details>
+      </div>
+
+      <!-- RIGHT: the signature — the four-element balance meter -->
+      <div class="panel panel--meter">
+        <div class="meter-head">
+          <h2>The plate</h2>
+          <p id="meterCaption" class="meter-caption">Your balance across the four elements shows up here.</p>
+        </div>
+        <div class="meter" id="meter">
+          <div class="gauge" data-el="salt"><div class="gauge__fill"></div><span class="gauge__label">Salt</span></div>
+          <div class="gauge" data-el="fat"><div class="gauge__fill"></div><span class="gauge__label">Fat</span></div>
+          <div class="gauge" data-el="acid"><div class="gauge__fill"></div><span class="gauge__label">Acid</span></div>
+          <div class="gauge" data-el="heat"><div class="gauge__fill"></div><span class="gauge__label">Heat</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="result" id="result" hidden aria-live="polite"></section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot__lockup"><b>Hafspot</b> — the spot for what you <em>have</em>.</p>
+    <p class="foot__note">The name hides the method: <b>H</b>eat · <b>A</b>cid · <b>F</b>at · <b>S</b>alt, in a pot. Cook the four elements well and nothing goes to waste.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
