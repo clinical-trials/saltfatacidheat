@@ -49,6 +49,27 @@
     <section class="workbench">
       <!-- LEFT: input -->
       <div class="panel panel--input">
+        <div class="photo">
+          <input id="photoInput" type="file" accept="image/*" capture="environment" hidden />
+          <button id="photoBtn" class="photo-btn" type="button">
+            <span class="photo-btn__icon" aria-hidden="true">📷</span>
+            <span class="photo-btn__text"><b>Snap the fridge</b><small>Let Fuchsia read your ingredients from one photo</small></span>
+          </button>
+          <div id="photoPreview" class="photo-preview" hidden></div>
+          <p id="photoStatus" class="photo-status" role="status" hidden></p>
+          <details class="keyrow" id="keyRow">
+            <summary>🔑 Connect your Anthropic key (for photo reading)</summary>
+            <p class="keyrow__note">Photo reading uses Claude vision. Paste your Anthropic API key — it's stored only in this browser and sent only to Anthropic. Listing by hand works without a key.</p>
+            <div class="keyrow__entry">
+              <input id="keyInput" type="password" autocomplete="off" placeholder="sk-ant-…" />
+              <button id="keySave" class="add-btn" type="button">Save</button>
+            </div>
+            <p id="keyStatus" class="keyrow__status"></p>
+          </details>
+        </div>
+
+        <div class="or-divider"><span>or list them yourself</span></div>
+
         <label class="field-label" for="ingredientInput">What's in the fridge?</label>
         <div class="entry">
           <input id="ingredientInput" type="text" autocomplete="off" placeholder="wilting spinach, half a lemon, leftover rice…" aria-describedby="entryHint" />
@@ -98,6 +119,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/engine.js"></script>
+  <script src="js/vision.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

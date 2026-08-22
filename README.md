@@ -19,8 +19,12 @@ The name *is* the method, and it *is* the brand color.
 
 ## How it works
 
-1. **Add what's in the fridge** — type it (with typeahead) or tap from the usual
-   suspects. Flag anything on its last day with 🔥 *use first*.
+1. **Add what's in the fridge** — two ways, both feeding the same editable list:
+   - 📷 **Snap the fridge** — one photo, read by Claude vision into an ingredient list
+     (with a guess at what to use first). Needs your Anthropic API key, stored only in
+     your browser.
+   - **List them yourself** — type with typeahead, or tap from the usual suspects.
+     Works with no key. Flag anything on its last day with 🔥 *use first*.
 2. **Diagnose the plate** — the engine classifies each item by element (salt/fat/acid)
    and plate role (protein/veg/starch/aromatic) and shows your balance on the
    four-element meter.
@@ -39,12 +43,19 @@ offline, deploys straight to GitHub Pages. Your pantry persists in `localStorage
 - `styles.css` — fuchsia-forward identity, color-coded elements (Heat = fuchsia), light/dark
 - `js/data.js` — the knowledge base: ~110 ingredients, 10 dish shapes, lessons
 - `js/engine.js` — the coaching engine (classify → score shapes → write moves), deterministic
-- `js/app.js` — UI wiring, typeahead, meter, persistence
+- `js/vision.js` — browser-direct Claude vision: photo → ingredient list (key stays local)
+- `js/app.js` — UI wiring, typeahead, meter, persistence, photo + key handling
+
+The fridge photo calls the Anthropic API straight from the browser
+(`anthropic-dangerous-direct-browser-access`), so the app stays static — no backend to run.
+The model defaults to `claude-opus-5` (see `MODEL` in `js/vision.js`); switch to
+`claude-haiku-4-5` or `claude-sonnet-5` for lower cost per photo. To let reviewers use the
+photo feature without their own key, add a tiny serverless proxy that holds the key.
 
 ### Roadmap
 
-- **v2 (Plus):** swap the rules engine for a Claude-powered coach that improvises free-form
-  from any ingredients, remembers your pantry, and builds a "complete-the-balance" list.
+- **Claude-powered coach:** extend the vision call into a free-form SFAH coach that
+  improvises from any ingredients, remembers your pantry, and builds a "complete-the-balance" list.
 - Saved meals, a "food saved" streak, and household sharing.
 
 ## Run locally

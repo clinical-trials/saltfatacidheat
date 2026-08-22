@@ -291,8 +291,82 @@
     meterCaption.textContent = "Your balance across the four elements shows up here.";
   });
 
+  // ——— Photo reading (browser-direct Claude vision)
+  function addRecognized(items) {
+    var added = 0;
+    items.forEach(function (it) {
+      var exists = pantry.some(function (p) { return p.name.toLowerCase() === it.name.toLowerCase(); });
+      if (!exists) { pantry.push({ name: it.name, useFirst: !!it.useFirst }); added++; }
+    });
+    save(); renderPantry();
+    return added;
+  }
+
+  function initVision() {
+    var photoInput = $("photoInput"), photoBtn = $("photoBtn"),
+        photoPreview = $("photoPreview"), photoStatus = $("photoStatus"),
+        keyRow = $("keyRow"), keyInput = $("keyInput"), keySave = $("keySave"), keyStatus = $("keyStatus");
+    if (!photoBtn) return;
+
+    function refreshKey() {
+      var has = !!HAF.getKey();
+      keyStatus.textContent = has ? "Key connected — stored only in this browser." : "";
+      keyInput.placeholder = has ? "•••• connected — paste to replace" : "sk-ant-…";
+    }
+    refreshKey();
+
+    keySave.addEventListener("click", function () {
+      HAF.setKey(keyInput.value.trim());
+      keyInput.value = "";
+      refreshKey();
+      keyRow.open = false;
+    });
+
+    photoBtn.addEventListener("click", function () {
+      if (!HAF.getKey()) {
+        keyRow.open = true;
+        photoStatus.hidden = false;
+        photoStatus.textContent = "Add your Anthropic key first, then snap again.";
+        keyInput.focus();
+        return;
+      }
+      photoInput.click();
+    });
+
+    photoInput.addEventListener("change", function () {
+      var file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      photoStatus.hidden = false;
+      photoStatus.textContent = "Reading your fridge…";
+      HAF.fileToImage(file).then(function (img) {
+        photoPreview.hidden = false;
+        photoPreview.innerHTML = '<img alt="your fridge photo" src="' + img.dataUrl + '" />';
+        return HAF.readFridge(img.base64, img.mediaType);
+      }).then(function (items) {
+        photoInput.value = "";
+        if (!items.length) {
+          photoStatus.textContent = "Couldn't spot clear ingredients — try a closer, brighter photo, or list them by hand.";
+          return;
+        }
+        var n = addRecognized(items);
+        photoStatus.innerHTML = n
+          ? "Added <b>" + n + "</b> item" + (n === 1 ? "" : "s") + " — fix anything I misread, then hit Coach me."
+          : "Those items were already on your list.";
+      }).catch(function (err) {
+        photoInput.value = "";
+        var msg = String((err && err.message) || err);
+        if (msg === "no-key") { keyRow.open = true; photoStatus.textContent = "Add your Anthropic key first."; }
+        else if (msg.indexOf("api:401") !== -1) { photoStatus.textContent = "That key was rejected (401). Check it and try again."; }
+        else if (msg.indexOf("api:429") !== -1) { photoStatus.textContent = "Rate limited — wait a moment and snap again."; }
+        else if (msg.indexOf("api:") !== -1) { photoStatus.textContent = "Claude couldn't read it just now — try again, or list by hand."; }
+        else { photoStatus.textContent = "Couldn't read that photo — you can still list items by hand."; }
+      });
+    });
+  }
+
   // ——— Boot
   renderQuickAdd();
   renderPantry();
   initTheme();
+  initVision();
 })();
