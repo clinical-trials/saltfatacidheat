@@ -382,3 +382,32 @@ HAF.tastes = [
   { key: "acid", name: "Acid", chem: "Organic acids",  role: ["Brightens flavor", "Balances taste"],    items: ["lemon", "vinegar", "yogurt", "tomato", "wine", "pickles"] },
   { key: "heat", name: "Heat", chem: "Thermal energy", role: ["Transforms texture", "Develops flavor"], items: ["a hard sear", "a gentle simmer", "a hot roast", "a slow braise", "a blistering pan"] }
 ];
+
+/* Food storage guide — fridge / freezer / pantry keeping times.
+ * Source: USDA FSIS "Cold Food Storage Chart" & USDA FoodKeeper (foodsafety.gov), FDA guidance.
+ * Public-domain U.S. government data. Times are guidelines for peak quality & safety —
+ * not hard expiry dates. When in doubt, throw it out. */
+HAF.storage = [
+  { food: "Chicken & turkey (raw)", fridge: "1–2 days", freezer: "9–12 mo", pantry: "—" },
+  { food: "Ground meat", fridge: "1–2 days", freezer: "3–4 mo", pantry: "—" },
+  { food: "Beef & pork (chops, steaks, roasts)", fridge: "3–5 days", freezer: "4–12 mo", pantry: "—" },
+  { food: "Fish & shellfish (fresh)", fridge: "1–2 days", freezer: "3–6 mo", pantry: "—" },
+  { food: "Bacon", fridge: "7 days", freezer: "1 mo", pantry: "—" },
+  { food: "Deli & lunch meat (opened)", fridge: "3–5 days", freezer: "1–2 mo", pantry: "—" },
+  { food: "Eggs (in shell)", fridge: "3–5 weeks", freezer: "don't freeze in shell", pantry: "—" },
+  { food: "Milk", fridge: "~1 week", freezer: "3 mo", pantry: "—" },
+  { food: "Hard cheese (opened)", fridge: "3–4 weeks", freezer: "6–8 mo", pantry: "—" },
+  { food: "Soft cheese", fridge: "1 week", freezer: "6 mo", pantry: "—" },
+  { food: "Cooked leftovers", fridge: "3–4 days", freezer: "2–6 mo", pantry: "—" },
+  { food: "Cooked rice & grains", fridge: "3–4 days", freezer: "1–2 mo", pantry: "—" },
+  { food: "Leafy greens (spinach, lettuce)", fridge: "3–7 days", freezer: "—", pantry: "—" },
+  { food: "Broccoli, cauliflower, green beans", fridge: "3–5 days", freezer: "8–12 mo (blanched)", pantry: "—" },
+  { food: "Carrots & celery", fridge: "2–3 weeks", freezer: "10–12 mo (blanched)", pantry: "—" },
+  { food: "Fresh herbs", fridge: "1–2 weeks", freezer: "—", pantry: "—" },
+  { food: "Berries", fridge: "2–3 days", freezer: "several months", pantry: "—" },
+  { food: "Apples & citrus", fridge: "3–4 weeks", freezer: "—", pantry: "a few days" },
+  { food: "Tomatoes", fridge: "2–3 days once ripe", freezer: "—", pantry: "until ripe" },
+  { food: "Onions, garlic & shallots", fridge: "—", freezer: "10–12 mo (chopped)", pantry: "1–2 months (cool, dark)" },
+  { food: "Potatoes & winter squash", fridge: "—", freezer: "—", pantry: "1–2 months (cool, dark)" },
+  { food: "Opened condiments (ketchup, mustard, soy)", fridge: "several months", freezer: "—", pantry: "—" }
+];

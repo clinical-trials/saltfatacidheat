@@ -511,11 +511,21 @@
     };
   }
 
+  // ——— Food storage guide (FDA / USDA keeping times)
+  function renderStorageGuide() {
+    var body = $("storageBody");
+    if (!body || !HAF.storage) return;
+    body.innerHTML = HAF.storage.map(function (s) {
+      return '<tr><th scope="row">' + s.food + "</th><td>" + s.fridge + "</td><td>" + s.freezer + "</td><td>" + s.pantry + "</td></tr>";
+    }).join("");
+  }
+
   // ——— Boot
   renderQuickAdd();
   renderPantry();
   renderTasteLab();
   renderPantryGuide();
+  renderStorageGuide();
   initTheme();
   initVision();
   initVoice();

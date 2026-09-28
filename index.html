@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e01a79'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='white'%3E🐹%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <!-- Reusable cute-food characters (referenced with <use>) -->
@@ -287,6 +287,22 @@
       </div>
       <div class="shelf-grid" id="shelfGrid"></div>
     </section>
+    <!-- FOOD STORAGE GUIDE (FDA / USDA) -->
+    <section class="storage-guide" data-reveal aria-labelledby="sgTitle">
+      <div class="sg-head">
+        <p class="eyebrow">Waste less</p>
+        <h2 id="sgTitle">How long does it keep?</h2>
+        <p class="sg-sub">Storage times straight from the USDA &amp; FDA, so you know what to cook first. These are guidelines for peak quality and safety — when in doubt, throw it out.</p>
+      </div>
+      <div class="sg-table-wrap">
+        <table class="sg-table">
+          <thead><tr><th>Food</th><th>Fridge</th><th>Freezer</th><th>Pantry</th></tr></thead>
+          <tbody id="storageBody"></tbody>
+        </table>
+      </div>
+      <p class="sg-source">Source: USDA FSIS Cold Food Storage Chart &amp; USDA FoodKeeper (foodsafety.gov) — public-domain U.S. government data.</p>
+    </section>
+
     <!-- MEET THE MAKER -->
     <section class="maker" data-reveal>
       <div class="maker__card">
@@ -319,9 +335,9 @@
       carries <b>F</b>at, <b>H</b>eat, <b>S</b>alt and <b>A</b>cid — the four elements of good cooking, in one color. Master them and nothing goes to waste.</p>
   </footer>
 
-  <script src="js/data.js?v=2"></script>
-  <script src="js/engine.js?v=2"></script>
-  <script src="js/vision.js?v=2"></script>
-  <script src="js/app.js?v=2"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/engine.js?v=3"></script>
+  <script src="js/vision.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>
