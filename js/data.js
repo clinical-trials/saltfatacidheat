@@ -288,7 +288,35 @@ HAF.dishes = [
     blurb: "Crispy potatoes, a protein, and eggs. Breakfast-for-dinner that clears the drawer.",
     needs: { starch: 1.5, protein: 1, egg: 1, veg: 1, aromatic: 0.5 }, key: "starch",
     heat: "Crisp the potatoes hard in plenty of fat and resist stirring — let a real crust form. Fold everything else in, then finish with eggs on top.",
-    absorb: 1.8, raw: false, cuisines: []
+    absorb: 1.8, raw: false, cuisines: [], meals: ["breakfast", "lunch", "dinner"]
+  },
+  {
+    id: "scramble", name: "Soft scramble", emoji: "🍳",
+    blurb: "Two minutes and a hot pan. Eggs plus whatever soft veg, herb, or cheese heel needs a home.",
+    needs: { egg: 2, veg: 1, dairy: 0.5, aromatic: 0.5 }, key: "egg",
+    heat: "Low and slow, stirring constantly, and pull it off the heat while it's still glossy — it finishes on the plate.",
+    absorb: 1.4, raw: false, cuisines: [], meals: ["breakfast"]
+  },
+  {
+    id: "savoryoats", name: "Savory oats", emoji: "🥣",
+    blurb: "Porridge's savory cousin — creamy oats under a jammy egg, herbs, and something crunchy.",
+    needs: { starch: 2, egg: 0.5, veg: 0.5 }, key: "starch",
+    heat: "Simmer the oats in well-salted water or stock until creamy, then top with a soft egg and a drizzle of fat.",
+    absorb: 1.3, raw: false, cuisines: [], meals: ["breakfast"]
+  },
+  {
+    id: "yogurtbowl", name: "Yogurt bowl", emoji: "🥛",
+    blurb: "Tangy yogurt as the canvas — fruit, a drizzle of honey, nuts or seeds for crunch. No cooking required.",
+    needs: { dairy: 2 }, key: "dairy",
+    heat: "No heat — just layer it up. Toast the nuts or seeds first if you like, for extra depth.",
+    absorb: 1.1, raw: true, cuisines: [], meals: ["breakfast"]
+  },
+  {
+    id: "toast", name: "Loaded toast", emoji: "🍞",
+    blurb: "Good bread, toasted deep, piled with a fat and a protein. Breakfast, or a fast lunch.",
+    needs: { starch: 1.5, fat: 1, protein: 0.5 }, key: "starch",
+    heat: "Toast the bread until it's properly golden and crisp — that's the whole texture. Warm the topping, then finish with salt and a squeeze of acid.",
+    absorb: 1.2, raw: false, cuisines: [], meals: ["breakfast", "lunch"]
   }
 ];
 
@@ -349,10 +377,8 @@ HAF.pantryShelves = [
  * Salt / Fat / Acid overlap with the cooking engine; Sweet / Bitter / Umami round out
  * the full palette the tongue reads. Chemistry + role mirror the flavor-lab reference. */
 HAF.tastes = [
-  { key: "salty",  name: "Salty",  chem: "NaCl",          role: ["Enhances flavor", "Controls moisture"],  items: ["sea salt", "anchovies", "olives", "soy sauce", "miso", "capers"] },
-  { key: "fatty",  name: "Fatty",  chem: "Triglycerides", role: ["Adds richness", "Carries flavor"],        items: ["olive oil", "butter", "avocado", "cheese", "nuts", "cream"] },
-  { key: "sweet",  name: "Sweet",  chem: "Sugars",        role: ["Balances flavor", "Provides energy"],     items: ["honey", "berries", "caramelized onion", "maple", "roasted squash"] },
-  { key: "acidic", name: "Acidic", chem: "Organic acids", role: ["Brightens flavor", "Balances taste"],     items: ["lemon", "vinegar", "yogurt", "tomato", "wine", "pickles"] },
-  { key: "bitter", name: "Bitter", chem: "Alkaloids",     role: ["Adds complexity", "Stimulates appetite"], items: ["dark chocolate", "cocoa", "kale", "coffee", "radicchio", "citrus peel"] },
-  { key: "umami",  name: "Umami",  chem: "Glutamates",    role: ["Enhances savoriness", "Adds depth"],      items: ["parmesan", "mushrooms", "tomato paste", "fish sauce", "cured meat", "seaweed"] }
+  { key: "salt", name: "Salt", chem: "NaCl",           role: ["Enhances flavor", "Controls moisture"],  items: ["sea salt", "soy sauce", "miso", "parmesan", "anchovies", "olives"] },
+  { key: "fat",  name: "Fat",  chem: "Triglycerides",  role: ["Adds richness", "Carries flavor"],       items: ["olive oil", "butter", "avocado", "cheese", "nuts", "cream"] },
+  { key: "acid", name: "Acid", chem: "Organic acids",  role: ["Brightens flavor", "Balances taste"],    items: ["lemon", "vinegar", "yogurt", "tomato", "wine", "pickles"] },
+  { key: "heat", name: "Heat", chem: "Thermal energy", role: ["Transforms texture", "Develops flavor"], items: ["a hard sear", "a gentle simmer", "a hot roast", "a slow braise", "a blistering pan"] }
 ];

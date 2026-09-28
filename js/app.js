@@ -214,11 +214,17 @@
 
   function renderResult(a) {
     var d = a.best;
-    var altHtml = a.alternates.length
-      ? '<div class="rc-section"><h3>Not feeling it? Also works</h3><div class="alts">' +
-        a.alternates.map(function (alt) {
-          return '<button class="alt-chip" data-id="' + alt.id + '"><span>' + alt.emoji + "</span>" + alt.name + "</button>";
-        }).join("") + "</div></div>"
+    var MEAL_LABELS = { breakfast: "Breakfast", lunch: "Lunch", dinner: "Dinner" };
+    var mealRows = ["breakfast", "lunch", "dinner"].map(function (m) {
+      var dishes = (a.byMeal && a.byMeal[m]) || [];
+      if (!dishes.length) return "";
+      return '<div class="meal-row"><span class="meal-row__label">' + MEAL_LABELS[m] + "</span><div class=\"alts\">" +
+        dishes.map(function (dish) {
+          return '<button class="alt-chip' + (dish.id === d.id ? " is-current" : "") + '" data-id="' + dish.id + '"><span>' + dish.emoji + "</span>" + dish.name + "</button>";
+        }).join("") + "</div></div>";
+    }).join("");
+    var byMealHtml = mealRows
+      ? '<div class="rc-section"><h3>Ideas by meal <small>tap one to see its moves</small></h3><div class="meal-rows">' + mealRows + "</div></div>"
       : "";
 
     var useFirstHtml = a.useFirst.length
@@ -246,8 +252,8 @@
           useFirstHtml +
           '<div class="rc-section"><h3>Your four moves</h3><div class="moves">' + movesHtml + "</div></div>" +
           completeHtml +
+          byMealHtml +
           '<div class="rc-section"><h3>Why it works</h3><p class="lesson">' + a.lesson + "</p></div>" +
-          altHtml +
         "</div>" +
       "</div>";
 
@@ -433,8 +439,8 @@
     HAF.tastes.forEach(function (t) {
       var card = document.createElement("div");
       card.className = "taste";
-      card.style.setProperty("--el", "var(--taste-" + t.key + ")");
-      var ph = t.key === "acidic"
+      card.style.setProperty("--el", "var(--" + t.key + ")");
+      var ph = t.key === "acid"
         ? '<div class="ph-strip" title="Acids sit low on the pH scale — the sour, bright end"><span class="ph-bar"></span><span class="ph-marker"></span><span class="ph-nums"><b>0</b><b>7</b><b>14</b></span></div>'
         : "";
       card.innerHTML =
@@ -462,6 +468,49 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
+  // ——— Voice dictation — the fastest way to load the fridge: just say it.
+  function initVoice() {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var micBtn = $("micBtn");
+    if (!micBtn) return;
+    if (!SR) { micBtn.hidden = true; return; } // unsupported browser — keep it hidden
+    micBtn.hidden = false;
+    var rec = new SR();
+    rec.lang = "en-US"; rec.interimResults = false; rec.maxAlternatives = 1; rec.continuous = false;
+    var listening = false;
+    var hintEl = $("entryHint");
+    var hintDefault = hintEl ? hintEl.innerHTML : "";
+    micBtn.addEventListener("click", function () {
+      if (listening) { try { rec.stop(); } catch (e) {} return; }
+      try { rec.start(); } catch (e) {}
+    });
+    rec.onstart = function () {
+      listening = true; micBtn.classList.add("listening"); micBtn.setAttribute("aria-pressed", "true");
+      if (hintEl) hintEl.textContent = "Listening… say what's in your fridge, e.g. “spinach, half a lemon, leftover rice.”";
+    };
+    rec.onend = function () {
+      listening = false; micBtn.classList.remove("listening"); micBtn.removeAttribute("aria-pressed");
+      if (hintEl) hintEl.innerHTML = hintDefault;
+    };
+    rec.onerror = function (e) {
+      listening = false; micBtn.classList.remove("listening");
+      if (hintEl) {
+        hintEl.textContent = (e && e.error === "not-allowed")
+          ? "Microphone blocked — allow it in your browser, or just type."
+          : "Didn't catch that — try again, or type it in.";
+        setTimeout(function () { hintEl.innerHTML = hintDefault; }, 3500);
+      }
+    };
+    rec.onresult = function (e) {
+      var text = "";
+      for (var i = 0; i < e.results.length; i++) { text += e.results[i][0].transcript + " "; }
+      text.split(/,|;|\band\b|\bthen\b|\balso\b|\bplus\b/i).forEach(function (s) {
+        var name = s.replace(/^\s*(i have|i've got|there's|there is|we have|we've got|got|some|a|an)\s+/i, "").trim();
+        if (name.length > 1) addItem(name);
+      });
+    };
+  }
+
   // ——— Boot
   renderQuickAdd();
   renderPantry();
@@ -469,5 +518,6 @@
   renderPantryGuide();
   initTheme();
   initVision();
+  initVoice();
   initReveal();
 })();

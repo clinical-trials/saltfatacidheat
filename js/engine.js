@@ -173,6 +173,17 @@
     fat: "You're missing fat. Olive oil, butter, a spoon of yogurt or a handful of nuts will carry the flavor and round it out."
   };
 
+  // Which meals each dish shape suits. Dishes may carry their own `meals`; the rest map here.
+  var MEALS = ["breakfast", "lunch", "dinner"];
+  var MEAL_MAP = {
+    frittata: ["breakfast", "lunch", "dinner"], shakshuka: ["breakfast", "lunch", "dinner"],
+    grainbowl: ["lunch", "dinner"], salad: ["lunch", "dinner"], quesadilla: ["lunch", "dinner"],
+    soup: ["lunch", "dinner"], noodlesoup: ["lunch", "dinner"], friedrice: ["lunch", "dinner"],
+    tacos: ["lunch", "dinner"], pasta: ["lunch", "dinner"], stirfry: ["lunch", "dinner"],
+    curry: ["dinner"], sheetpan: ["dinner"]
+  };
+  function mealsFor(d) { return d.meals || MEAL_MAP[d.id] || ["lunch", "dinner"]; }
+
   // Main entry point. pantry = [{ name, useFirst }]
   HAF.analyze = function (pantry) {
     var items = pantry.map(function (p) {
@@ -193,11 +204,20 @@
 
     var gap = findGap(items);
 
+    // Best options per meal — so there's always a solid breakfast, lunch, and dinner pick.
+    var byMeal = {};
+    MEALS.forEach(function (m) {
+      byMeal[m] = ranked.filter(function (r) {
+        return r.keyMet && r.coverage >= 0.34 && mealsFor(r.dish).indexOf(m) !== -1;
+      }).slice(0, 2).map(function (r) { return r.dish; });
+    });
+
     return {
       empty: false,
       items: items,
       best: best.dish,
       bestMeta: best,
+      byMeal: byMeal,
       alternates: alternates.map(function (r) { return r.dish; }),
       levels: elementLevels(items, true),
       moves: writeMoves(items, best.dish),
