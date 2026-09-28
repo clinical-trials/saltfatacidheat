@@ -98,7 +98,7 @@
       // cuisine coherence: small nudge when pantry tags align with the shape
       var cuisineBonus = 0;
       (d.cuisines || []).forEach(function (c) {
-        if (items.some(function (i) { return i.tags.indexOf(c) !== -1; })) cuisineBonus += 0.4;
+        if (items.some(function (i) { return i.tags.indexOf(c) !== -1; })) cuisineBonus += 0.8;
       });
       var score = coverage * 5 + wasteScore + cuisineBonus + (keyMet ? 1 : -4);
       return { dish: d, score: score, coverage: coverage, keyMet: keyMet, met: met, usablePerishables: usablePerishables };

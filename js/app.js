@@ -75,6 +75,27 @@
       label.textContent = p.name;
       chip.appendChild(label);
 
+      // Chemistry dots — which elements this ingredient brings to the reaction.
+      var contrib = [];
+      if (c) {
+        if (c.s >= 1) contrib.push("salt");
+        if (c.f >= 1) contrib.push("fat");
+        if (c.a >= 1) contrib.push("acid");
+      }
+      if (contrib.length) {
+        var els = document.createElement("span");
+        els.className = "chip__els";
+        els.setAttribute("aria-hidden", "true");
+        els.title = "Brings " + contrib.join(", ");
+        contrib.forEach(function (el) {
+          var dot = document.createElement("span");
+          dot.className = "chip__dot";
+          dot.dataset.el = el;
+          els.appendChild(dot);
+        });
+        chip.appendChild(els);
+      }
+
       var flame = document.createElement("button");
       flame.className = "chip__flame";
       flame.type = "button";
@@ -175,7 +196,7 @@
   // ——— Meter
   function setMeter(levels) {
     ["salt", "fat", "acid", "heat"].forEach(function (el) {
-      var fill = document.querySelector('.gauge[data-el="' + el + '"] .gauge__fill');
+      var fill = document.querySelector('.tube-col[data-el="' + el + '"] .tube__liquid');
       if (fill) fill.style.height = (levels[el] || 0) + "%";
     });
   }
@@ -364,9 +385,51 @@
     });
   }
 
+  // ——— Stock-the-pantry guide
+  function renderPantryGuide() {
+    var grid = $("shelfGrid");
+    if (!grid || !HAF.pantryShelves) return;
+    var SYM = { salt: "S", fat: "F", acid: "A", heat: "H" };
+    HAF.pantryShelves.forEach(function (s) {
+      var card = document.createElement("div");
+      card.className = "shelf";
+      card.dataset.el = s.el;
+      card.style.setProperty("--el", "var(--" + s.el + ")");
+
+      var itemsHtml = function (items) {
+        return '<span class="shelf__items">' + items.map(function (i) {
+          return '<span class="shelf__item">' + i + "</span>";
+        }).join("") + "</span>";
+      };
+
+      var html = '<div class="shelf__head"><span class="shelf__sym">' + SYM[s.el] + "</span>" +
+        '<div><h3 class="shelf__name">' + s.name + "</h3>" +
+        '<p class="shelf__tag">' + s.tagline + "</p></div></div>";
+
+      if (s.groups) {
+        s.groups.forEach(function (g) {
+          html += '<div class="shelf__group"><div class="shelf__group-label">' + g.label + "</div>" + itemsHtml(g.items) + "</div>";
+        });
+      }
+      if (s.chile) {
+        html += '<div class="chile-scale">';
+        s.chile.forEach(function (c) {
+          html += '<div class="chile-row"><span class="chile-level">' + c.level +
+            ' <span class="chile-flames">' + "🌶️".repeat(c.flames) + "</span></span>" + itemsHtml(c.items) + "</div>";
+        });
+        html += "</div>";
+      }
+      if (s.note) html += '<p class="shelf__note">' + s.note + "</p>";
+
+      card.innerHTML = html;
+      grid.appendChild(card);
+    });
+  }
+
   // ——— Boot
   renderQuickAdd();
   renderPantry();
+  renderPantryGuide();
   initTheme();
   initVision();
 })();

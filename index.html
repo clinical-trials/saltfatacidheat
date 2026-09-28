@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fuchsia — cook what you have</title>
-  <meta name="description" content="Tell Fuchsia what's about to go off. Get one balanced meal and the salt, fat, acid and heat moves to make it sing — the four elements hiding in one color. Waste nothing." />
+  <meta name="description" content="Tell Fuchsia what's about to expire in your fridge or pantry. It teaches you to improvise from what's on hand — one balanced meal, with the salt, fat, acid and heat moves to make it sing. Waste nothing." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -12,6 +12,52 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Reusable cute-food characters (referenced with <use>) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="f-lemon" viewBox="0 0 48 48">
+        <path d="M12 21c2-6 9-9 15-7 6 2 10 9 8 15-2 6-10 9-16 7s-9-9-7-15z" fill="#f6d24d"/>
+        <path d="M22 12c2-3 6-4 9-2-2 0-5 2-6 5z" fill="#8fbf2f"/>
+        <circle cx="19" cy="26" r="1.7" fill="#6f5410"/>
+        <circle cx="29" cy="26" r="1.7" fill="#6f5410"/>
+        <path d="M20 31q4 3 8 0" fill="none" stroke="#6f5410" stroke-width="1.7" stroke-linecap="round"/>
+        <circle cx="16" cy="30" r="2.4" fill="#fff0b8" opacity=".6"/>
+      </symbol>
+      <symbol id="f-tomato" viewBox="0 0 48 48">
+        <circle cx="24" cy="28" r="15" fill="#e8503a"/>
+        <path d="M17 14q7 4 14 0-2 5-7 5t-7-5z" fill="#6bb63a"/>
+        <path d="M24 10v5" stroke="#5a9e2f" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="19" cy="29" r="1.7" fill="#7a1e12"/>
+        <circle cx="29" cy="29" r="1.7" fill="#7a1e12"/>
+        <path d="M20 34q4 3 8 0" fill="none" stroke="#7a1e12" stroke-width="1.7" stroke-linecap="round"/>
+        <circle cx="18" cy="24" r="3" fill="#ff8a72" opacity=".6"/>
+      </symbol>
+      <symbol id="f-egg" viewBox="0 0 48 48">
+        <path d="M13 24c-3-2-6 1-5 5 1 3 4 3 6 2 1 4 6 5 10 3 5-2 6-7 3-10 3-4 0-9-5-8-3 0-5 2-5 5-2-1-3 0-4 3z" fill="#fffdf7" stroke="#ecdfce" stroke-width="1"/>
+        <circle cx="23" cy="25" r="6" fill="#f6b93b"/>
+        <circle cx="21" cy="23" r="2" fill="#ffdb8f"/>
+      </symbol>
+      <symbol id="f-broccoli" viewBox="0 0 48 48">
+        <rect x="21" y="25" width="6" height="14" rx="3" fill="#bcd47f"/>
+        <circle cx="17" cy="22" r="7" fill="#4e9e3e"/>
+        <circle cx="31" cy="22" r="7" fill="#4e9e3e"/>
+        <circle cx="24" cy="16" r="8" fill="#5cb14a"/>
+        <circle cx="24" cy="23" r="7.5" fill="#67c054"/>
+      </symbol>
+      <symbol id="f-cheese" viewBox="0 0 48 48">
+        <path d="M9 34 L38 19 L41 34 Z" fill="#f7c948" stroke="#e6b323" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="19" cy="30" r="2.4" fill="#e3a91f"/>
+        <circle cx="28" cy="28" r="1.8" fill="#e3a91f"/>
+        <circle cx="33" cy="32" r="1.6" fill="#e3a91f"/>
+      </symbol>
+      <symbol id="f-milk" viewBox="0 0 48 48">
+        <path d="M18 19h12v20H18z" fill="#eef3f7" stroke="#d3e0ea" stroke-width="1"/>
+        <path d="M18 19l3-7h6l3 7z" fill="#dbe6ee" stroke="#d3e0ea" stroke-width="1"/>
+        <rect x="21" y="25" width="6" height="8" rx="1.5" fill="#5b7c99"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="topbar">
     <a class="brand" href="./" aria-label="Fuchsia home">
       <span class="brand__mark" aria-hidden="true">
@@ -43,14 +89,52 @@
     <section class="hero">
       <p class="eyebrow">Salt · Fat · Acid · Heat, minus the waste</p>
       <h1 class="hero__title">Cook what<br>you <span class="mark-underline">have.</span></h1>
-      <p class="hero__sub">Tell Fuchsia what's about to go off. It gives you one balanced meal — and the exact salt, fat, acid and heat moves to make it taste finished. No recipe. Nothing wasted.</p>
+      <p class="hero__sub">Tell Fuchsia what's about to expire in your fridge or pantry, and it <em>teaches you to improvise from what's on hand</em> — one balanced meal, with the exact salt, fat, acid and heat moves to make it sing. No recipe. Nothing wasted.</p>
     </section>
+
+    <div class="food-parade" aria-hidden="true">
+      <svg class="food-parade__item"><use href="#f-tomato"/></svg>
+      <svg class="food-parade__item"><use href="#f-lemon"/></svg>
+      <svg class="food-parade__item"><use href="#f-egg"/></svg>
+      <svg class="food-parade__item"><use href="#f-broccoli"/></svg>
+      <svg class="food-parade__item"><use href="#f-cheese"/></svg>
+      <svg class="food-parade__item"><use href="#f-milk"/></svg>
+    </div>
 
     <section class="workbench">
       <!-- LEFT: input -->
       <div class="panel panel--input">
+        <svg class="fridge-illo" viewBox="0 0 220 172" aria-hidden="true" focusable="false">
+          <ellipse cx="110" cy="160" rx="82" ry="10" fill="var(--fuchsia)" opacity="0.08"/>
+          <!-- body -->
+          <rect x="42" y="6" width="136" height="150" rx="18" fill="var(--surface-2)" stroke="var(--line)" stroke-width="2"/>
+          <rect x="42" y="6" width="136" height="150" rx="18" fill="none" stroke="var(--fuchsia)" stroke-width="2" opacity="0.35"/>
+          <!-- top brand plate -->
+          <rect x="56" y="16" width="108" height="9" rx="4.5" fill="var(--fuchsia)" opacity="0.5"/>
+          <!-- glass door -->
+          <rect x="55" y="32" width="110" height="116" rx="11" fill="var(--fuchsia)" opacity="0.06"/>
+          <rect x="55" y="32" width="110" height="116" rx="11" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+          <!-- shelves -->
+          <line x1="59" y1="76" x2="161" y2="76" stroke="var(--line)" stroke-width="1.5"/>
+          <line x1="59" y1="114" x2="161" y2="114" stroke="var(--line)" stroke-width="1.5"/>
+          <!-- food on shelves -->
+          <svg x="66" y="46" width="30" height="30"><use href="#f-tomato"/></svg>
+          <svg x="98" y="47" width="28" height="28"><use href="#f-lemon"/></svg>
+          <svg x="128" y="46" width="30" height="30"><use href="#f-milk"/></svg>
+          <svg x="68" y="84" width="30" height="30"><use href="#f-broccoli"/></svg>
+          <svg x="104" y="85" width="30" height="30"><use href="#f-egg"/></svg>
+          <svg x="134" y="86" width="28" height="28"><use href="#f-cheese"/></svg>
+          <!-- handle -->
+          <rect x="150" y="60" width="7" height="60" rx="3.5" fill="var(--fuchsia)" opacity="0.65"/>
+          <!-- feet -->
+          <rect x="54" y="156" width="14" height="8" rx="3" fill="var(--line)"/>
+          <rect x="152" y="156" width="14" height="8" rx="3" fill="var(--line)"/>
+          <!-- cold sparkle -->
+          <path d="M182 40 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2z" fill="var(--fuchsia)" opacity="0.55"/>
+        </svg>
+
         <div class="photo">
-          <input id="photoInput" type="file" accept="image/*" capture="environment" hidden />
+          <input id="photoInput" type="file" accept="image/*" class="sr-file" aria-hidden="true" tabindex="-1" />
           <button id="photoBtn" class="photo-btn" type="button">
             <span class="photo-btn__icon" aria-hidden="true">📷</span>
             <span class="photo-btn__text"><b>Snap the fridge</b><small>Let Fuchsia read your ingredients from one photo</small></span>
@@ -81,7 +165,7 @@
         <div id="pantry" class="pantry" aria-live="polite"></div>
 
         <div class="actions">
-          <button id="coachBtn" class="cta" type="button">Coach me</button>
+          <button id="coachBtn" class="cta" type="button"><svg class="cta__flask" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-4.6 8A2 2 0 0 0 7.2 20h9.6a2 2 0 0 0 1.8-3L14 9V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7.6 15h8.8" stroke="currentColor" stroke-width="1.8"/></svg>Run the experiment</button>
           <button id="clearBtn" class="link-btn" type="button" hidden>Clear</button>
         </div>
 
@@ -91,23 +175,89 @@
         </details>
       </div>
 
-      <!-- RIGHT: the signature — the four-element balance meter -->
+      <!-- RIGHT: the signature — the four-element balance, as a lab bench -->
       <div class="panel panel--meter">
         <div class="meter-head">
-          <h2>The plate</h2>
-          <p id="meterCaption" class="meter-caption">Your balance across the four elements shows up here.</p>
+          <h2><span class="beaker-glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-4.6 8A2 2 0 0 0 7.2 20h9.6a2 2 0 0 0 1.8-3L14 9V3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.6 15h8.8" stroke="currentColor" stroke-width="1.7"/></svg>
+          </span>The plate</h2>
+          <p class="meter-tagline">Flavor = Salt + Fat + Acid + Heat. Balance is everything.</p>
+          <p id="meterCaption" class="meter-caption">Add ingredients, and Fuchsia balances them across the four elements here.</p>
         </div>
         <div class="meter" id="meter">
-          <div class="gauge" data-el="salt"><div class="gauge__fill"></div><span class="gauge__label">Salt</span></div>
-          <div class="gauge" data-el="fat"><div class="gauge__fill"></div><span class="gauge__label">Fat</span></div>
-          <div class="gauge" data-el="acid"><div class="gauge__fill"></div><span class="gauge__label">Acid</span></div>
-          <div class="gauge" data-el="heat"><div class="gauge__fill"></div><span class="gauge__label">Heat</span></div>
+          <div class="tube-col" data-el="salt">
+            <span class="disp" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M10 15h12v11a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3z" fill="currentColor"/><path d="M11 15a5 5 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="11.5" r="1" fill="#fff"/><circle cx="18" cy="11.5" r="1" fill="#fff"/><circle cx="16" cy="9.5" r="1" fill="#fff"/></svg></span>
+            <div class="tube"><div class="tube__liquid"></div></div>
+            <span class="tube-label">Salt</span>
+          </div>
+          <div class="tube-col" data-el="fat">
+            <span class="disp" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 5c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="currentColor"/><ellipse cx="13" cy="19" rx="2.2" ry="3" fill="#fff" opacity=".5"/></svg></span>
+            <div class="tube"><div class="tube__liquid"></div></div>
+            <span class="tube-label">Fat</span>
+          </div>
+          <div class="tube-col" data-el="acid">
+            <span class="disp" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="currentColor"/><g stroke="#fff" stroke-width="1.3" opacity=".75" fill="none"><path d="M16 16V6"/><path d="M16 16l8-4"/><path d="M16 16l9 3"/><path d="M16 16l3 9"/><path d="M16 16l-7 8"/><path d="M16 16l-9-1"/><path d="M16 16l-2-9"/></g></svg></span>
+            <div class="tube"><div class="tube__liquid"></div></div>
+            <span class="tube-label">Acid</span>
+          </div>
+          <div class="tube-col" data-el="heat">
+            <span class="disp" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4c2 5-2 7-2 11 0 2 1 3 2 3 1-1 2-2 2-4 3 3 4 6 4 9a8 8 0 0 1-16 0c0-5 4-8 6-12 1-2 3-4 4-7z" fill="currentColor"/></svg></span>
+            <div class="tube"><div class="tube__liquid"></div></div>
+            <span class="tube-label">Heat</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- RESULT -->
     <section class="result" id="result" hidden aria-live="polite"></section>
+
+    <!-- STOCK THE PANTRY BY ELEMENT -->
+    <section class="pantry-guide" aria-labelledby="pgTitle">
+      <div class="pg-top">
+        <div class="pg-head">
+          <p class="eyebrow">Stock the lab</p>
+          <h2 id="pgTitle">Build a Salt·Fat·Acid·Heat pantry</h2>
+          <p class="pg-sub">Cooking is an experiment, and every ingredient's invited. Stock a little of each element — a vinegar shelf here, a chile shelf there — and you can balance almost anything, from a Tuesday scramble to a Sunday supper.</p>
+        </div>
+        <svg class="pantry-illo" viewBox="0 0 240 212" aria-hidden="true" focusable="false">
+          <rect x="6" y="6" width="228" height="200" rx="14" fill="var(--caramel)" opacity="0.16"/>
+          <rect x="14" y="14" width="212" height="184" rx="8" fill="var(--surface-2)"/>
+          <rect x="6" y="6" width="228" height="200" rx="14" fill="none" stroke="var(--caramel)" stroke-width="3"/>
+          <rect x="14" y="60" width="212" height="5" fill="var(--caramel)" opacity="0.5"/>
+          <rect x="14" y="106" width="212" height="5" fill="var(--caramel)" opacity="0.5"/>
+          <rect x="14" y="152" width="212" height="5" fill="var(--caramel)" opacity="0.5"/>
+          <!-- shelf 1: jars + grain boxes -->
+          <rect x="24" y="38" width="20" height="22" rx="4" fill="#e8503a"/><rect x="22" y="31" width="24" height="8" rx="3" fill="var(--fuchsia-deep)"/><rect x="28" y="45" width="12" height="9" rx="2" fill="#fff" opacity="0.85"/>
+          <rect x="50" y="40" width="18" height="20" rx="4" fill="#e0a12a"/><rect x="48" y="33" width="22" height="8" rx="3" fill="#a5761a"/>
+          <rect x="76" y="30" width="30" height="30" rx="3" fill="#efe6d2" stroke="#dcc9a6"/><rect x="80" y="43" width="22" height="10" rx="2" fill="#fff" opacity="0.7"/><text x="91" y="51" class="pi-lbl">FLOUR</text>
+          <rect x="112" y="32" width="26" height="28" rx="3" fill="#f3ece0" stroke="#dcc9a6"/><text x="125" y="49" class="pi-lbl">RICE</text>
+          <rect x="146" y="34" width="26" height="26" rx="3" fill="#e7d3ad" stroke="#cbb488"/><text x="159" y="50" class="pi-lbl">OATS</text>
+          <rect x="180" y="40" width="18" height="20" rx="4" fill="#c9447a"/><rect x="178" y="33" width="22" height="8" rx="3" fill="var(--fuchsia-deep)"/><rect x="184" y="45" width="10" height="9" rx="2" fill="#fff" opacity="0.8"/>
+          <!-- shelf 2: cans + pasta -->
+          <rect x="26" y="82" width="22" height="24" rx="3" fill="#8fbf2f"/><ellipse cx="37" cy="82" rx="11" ry="3" fill="#a9d15a"/><rect x="26" y="90" width="22" height="9" fill="#fff" opacity="0.85"/><text x="37" y="97" class="pi-lbl">BEAN</text>
+          <rect x="54" y="82" width="22" height="24" rx="3" fill="#e0a12a"/><ellipse cx="65" cy="82" rx="11" ry="3" fill="#eec25e"/><rect x="54" y="90" width="22" height="9" fill="#fff" opacity="0.85"/><text x="65" y="97" class="pi-lbl">CORN</text>
+          <rect x="82" y="82" width="22" height="24" rx="3" fill="#e8503a"/><ellipse cx="93" cy="82" rx="11" ry="3" fill="#f07a68"/><rect x="82" y="90" width="22" height="9" fill="#fff" opacity="0.85"/><text x="93" y="97" class="pi-lbl">SOUP</text>
+          <rect x="116" y="74" width="24" height="32" rx="3" fill="#3f7bcf"/><rect x="120" y="84" width="16" height="14" rx="2" fill="#fff" opacity="0.9"/><text x="128" y="94" class="pi-lbl" fill="#3f7bcf">PASTA</text>
+          <rect x="148" y="76" width="22" height="30" rx="3" fill="#5b7c99"/><rect x="152" y="86" width="14" height="12" rx="2" fill="#fff" opacity="0.85"/>
+          <rect x="180" y="80" width="14" height="26" rx="3" fill="#8fbf2f"/><rect x="184" y="72" width="6" height="10" fill="#8fbf2f"/><rect x="183" y="69" width="8" height="4" rx="1.5" fill="#6f5410"/>
+          <!-- shelf 3: bottles + cereal + alliums -->
+          <rect x="26" y="120" width="16" height="32" rx="4" fill="var(--fat)"/><rect x="31" y="108" width="6" height="14" fill="var(--fat)"/><rect x="30" y="104" width="8" height="5" rx="1.5" fill="#6f5410"/><rect x="28" y="130" width="12" height="12" rx="1" fill="#fff" opacity="0.9"/><text x="34" y="139" class="pi-lbl">OIL</text>
+          <rect x="48" y="120" width="16" height="32" rx="4" fill="var(--acid)"/><rect x="53" y="108" width="6" height="14" fill="var(--acid)"/><rect x="52" y="104" width="8" height="5" rx="1.5" fill="#3a5010"/><rect x="50" y="130" width="12" height="12" rx="1" fill="#fff" opacity="0.9"/><text x="56" y="139" class="pi-lbl">VIN</text>
+          <rect x="74" y="118" width="30" height="34" rx="3" fill="var(--fuchsia)"/><rect x="79" y="126" width="20" height="14" rx="2" fill="#fff" opacity="0.92"/><text x="89" y="136" class="pi-lbl" fill="var(--fuchsia)">CEREAL</text>
+          <rect x="112" y="126" width="18" height="26" rx="4" fill="#6fae2f"/><rect x="110" y="120" width="22" height="7" rx="3" fill="#4e7e1e"/>
+          <circle cx="146" cy="143" r="9" fill="#e6c9a0"/><path d="M146 134c-1-3 3-3 2 0" stroke="#8a6a3a" stroke-width="1.4" fill="none"/>
+          <circle cx="164" cy="144" r="8" fill="#d9b98a"/><path d="M164 136c-1-3 3-3 2 0" stroke="#8a6a3a" stroke-width="1.4" fill="none"/>
+          <path d="M188 152c-4 0-6-4-6-8s3-8 6-8 6 4 6 8-2 8-6 8z" fill="#f2ece0" stroke="#d9cdbb"/><path d="M188 128v-4" stroke="#b9a98f" stroke-width="1.6"/>
+          <!-- bottom: bread, potatoes, sugar, honey -->
+          <path d="M28 196c-4-16 8-24 22-24s26 8 22 24z" fill="#d99a52"/><path d="M40 176v18M50 176v18M60 176v18" stroke="#b87a34" stroke-width="1.3"/>
+          <rect x="86" y="176" width="58" height="20" rx="6" fill="var(--caramel)" opacity="0.4"/><ellipse cx="100" cy="184" rx="9" ry="7" fill="#c8925a"/><ellipse cx="116" cy="186" rx="9" ry="7" fill="#b9834b"/><ellipse cx="131" cy="184" rx="9" ry="7" fill="#c8925a"/>
+          <rect x="160" y="170" width="26" height="26" rx="5" fill="#f7f2ea" stroke="#e2d8c8"/><rect x="158" y="164" width="30" height="8" rx="3" fill="var(--caramel)"/><text x="173" y="187" class="pi-lbl">SUGAR</text>
+          <path d="M204 196c-6 0-9-5-9-12 0-4 2-8 9-8s9 4 9 8c0 7-3 12-9 12z" fill="#e0a12a"/><rect x="198" y="170" width="12" height="5" rx="2" fill="#a5761a"/>
+        </svg>
+      </div>
+      <div class="shelf-grid" id="shelfGrid"></div>
+    </section>
   </main>
 
   <footer class="foot">

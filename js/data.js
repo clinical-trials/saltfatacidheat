@@ -148,7 +148,41 @@ HAF.ingredients = [
   // ——— Sweet
   { name: "honey", aka: [], role: "sweet", s: 0, f: 0, a: 0, perish: 0, tags: ["balancer"] },
   { name: "maple syrup", aka: ["maple"], role: "sweet", s: 0, f: 0, a: 0, perish: 0, tags: ["balancer"] },
-  { name: "sugar", aka: ["brown sugar"], role: "sweet", s: 0, f: 0, a: 0, perish: 0, tags: ["balancer"] }
+  { name: "sugar", aka: ["brown sugar"], role: "sweet", s: 0, f: 0, a: 0, perish: 0, tags: ["balancer"] },
+
+  // ——— Wider coverage
+  { name: "turkey", aka: ["ground turkey"], role: "protein", s: 0, f: 1, a: 0, perish: 2, tags: ["searable"] },
+  { name: "lamb", aka: [], role: "protein", s: 0, f: 2, a: 0, perish: 2, tags: ["searable"] },
+  { name: "edamame", aka: [], role: "legume", s: 0, f: 0, a: 0, perish: 1, tags: ["asian", "freezer"] },
+  { name: "smoked salmon", aka: ["lox"], role: "protein", s: 2, f: 1, a: 0, perish: 1, tags: ["cured", "salt"] },
+  { name: "brussels sprouts", aka: [], role: "veg", s: 0, f: 0, a: 0, perish: 1, tags: ["roastable", "hardy"] },
+  { name: "bok choy", aka: ["pak choi"], role: "veg", s: 0, f: 0, a: 0, perish: 2, tags: ["leafy", "asian"] },
+  { name: "chard", aka: ["swiss chard"], role: "veg", s: 0, f: 0, a: 0, perish: 2, tags: ["leafy"] },
+  { name: "radish", aka: ["radishes"], role: "veg", s: 0, f: 0, a: 0, perish: 1, tags: ["crunch", "raw"] },
+  { name: "fennel", aka: [], role: "veg", s: 0, f: 0, a: 0, perish: 1, tags: ["aromatic"] },
+  { name: "turnip", aka: ["turnips"], role: "veg", s: 0, f: 0, a: 0, perish: 1, tags: ["hardy", "roastable"] },
+  { name: "snap peas", aka: ["snow peas", "sugar snap peas"], role: "veg", s: 0, f: 0, a: 0, perish: 2, tags: ["crunch"] },
+  { name: "pear", aka: ["pears"], role: "fruit", s: 0, f: 0, a: 1, perish: 1, tags: ["sweet"] },
+  { name: "mango", aka: [], role: "fruit", s: 0, f: 0, a: 1, perish: 2, tags: ["sweet"] },
+  { name: "pineapple", aka: [], role: "fruit", s: 0, f: 0, a: 1, perish: 2, tags: ["sweet", "bright"] },
+  { name: "ricotta", aka: [], role: "dairy", s: 0, f: 1, a: 0, perish: 2, tags: ["creamy", "italian"] },
+  { name: "goat cheese", aka: ["chevre"], role: "dairy", s: 1, f: 1, a: 1, perish: 1, tags: ["tangy"] },
+  { name: "cottage cheese", aka: [], role: "dairy", s: 1, f: 1, a: 0, perish: 2, tags: ["creamy"] },
+  { name: "gnocchi", aka: [], role: "starch", s: 0, f: 0, a: 0, perish: 1, tags: ["italian"] },
+  { name: "polenta", aka: ["cornmeal", "grits"], role: "starch", s: 0, f: 0, a: 0, perish: 0, tags: ["pantry"] },
+  { name: "pita", aka: ["flatbread", "naan"], role: "starch", s: 0, f: 0, a: 0, perish: 1, tags: ["bread"] },
+  { name: "chives", aka: [], role: "herb", s: 0, f: 0, a: 0, perish: 2, tags: ["fresh", "finisher"] },
+  { name: "coconut oil", aka: [], role: "fat", s: 0, f: 2, a: 0, perish: 0, tags: ["pantry"] },
+  { name: "ghee", aka: ["clarified butter"], role: "fat", s: 0, f: 2, a: 0, perish: 0, tags: ["high-heat", "curry"] },
+  { name: "pesto", aka: [], role: "fat", s: 1, f: 2, a: 0, perish: 1, tags: ["italian", "finisher"] },
+  { name: "hummus", aka: [], role: "legume", s: 1, f: 1, a: 1, perish: 1, tags: ["creamy", "mediterranean"] },
+  { name: "curry paste", aka: ["thai curry paste"], role: "spice", s: 1, f: 0, a: 0, perish: 0, tags: ["curry", "asian"] },
+  { name: "gochujang", aka: ["chili paste"], role: "condiment", s: 1, f: 0, a: 1, perish: 0, tags: ["spicy", "asian", "heat"] },
+  { name: "sesame seeds", aka: ["sesame"], role: "nut", s: 0, f: 1, a: 0, perish: 0, tags: ["crunch", "asian", "finisher"] },
+  { name: "breadcrumbs", aka: ["panko"], role: "starch", s: 0, f: 0, a: 0, perish: 0, tags: ["crunch", "pantry"] },
+  { name: "turmeric", aka: [], role: "spice", s: 0, f: 0, a: 0, perish: 0, tags: ["curry", "warm"] },
+  { name: "cayenne", aka: ["chili powder"], role: "spice", s: 0, f: 0, a: 0, perish: 0, tags: ["heat", "spicy"] },
+  { name: "jam", aka: ["jelly", "preserves"], role: "sweet", s: 0, f: 0, a: 1, perish: 0, tags: ["balancer"] }
 ];
 
 /* Dish templates.
@@ -227,6 +261,34 @@ HAF.dishes = [
     needs: { egg: 2, veg: 1.5, aromatic: 1, acid: 1 }, key: "egg",
     heat: "Simmer a tomato base until jammy, make wells, crack the eggs in, cover, and cook low until the whites set and the yolks stay runny.",
     absorb: 1.5, raw: false, cuisines: ["mediterranean"]
+  },
+  {
+    id: "curry", name: "Curry", emoji: "🍛",
+    blurb: "Aromatics, spice, and something creamy carry almost any protein or vegetable. Deeply forgiving.",
+    needs: { aromatic: 1.5, protein: 1, veg: 1.5, starch: 1, fat: 0.5 }, key: "aromatic",
+    heat: "Bloom your spices in fat with the aromatics first — that base is the whole dish — then add everything and simmer in coconut milk or stock until it thickens.",
+    absorb: 1.5, raw: false, cuisines: ["asian", "curry"]
+  },
+  {
+    id: "noodlesoup", name: "Noodle soup", emoji: "🍜",
+    blurb: "A brothy bowl that stretches a little protein and a lot of odds-and-ends into dinner.",
+    needs: { starch: 1.5, aromatic: 1, veg: 1.5, protein: 1 }, key: "starch",
+    heat: "Simmer a savory broth with the aromatics, then add quick-cooking veg and the noodles right at the end so they don't turn to mush.",
+    absorb: 1.7, raw: false, cuisines: ["asian"]
+  },
+  {
+    id: "quesadilla", name: "Quesadilla or melt", emoji: "🫓",
+    blurb: "Cheese is the glue. A tortilla or bread plus whatever savory bits need using up.",
+    needs: { starch: 1.5, dairy: 1.5, veg: 1, protein: 0.5 }, key: "starch",
+    heat: "Low and slow in a dry or lightly buttered pan — the outside should be crisp and golden by the time the cheese is fully molten.",
+    absorb: 1.3, raw: false, cuisines: ["mexican"]
+  },
+  {
+    id: "hash", name: "Crispy hash", emoji: "🥔",
+    blurb: "Crispy potatoes, a protein, and eggs. Breakfast-for-dinner that clears the drawer.",
+    needs: { starch: 1.5, protein: 1, egg: 1, veg: 1, aromatic: 0.5 }, key: "starch",
+    heat: "Crisp the potatoes hard in plenty of fat and resist stirring — let a real crust form. Fold everything else in, then finish with eggs on top.",
+    absorb: 1.8, raw: false, cuisines: []
   }
 ];
 
@@ -246,4 +308,39 @@ HAF.quickAdd = [
   { group: "Dairy", items: ["butter", "parmesan", "cheddar", "yogurt", "milk"] },
   { group: "Starch", items: ["rice", "cooked rice", "pasta", "bread", "tortilla", "potato"] },
   { group: "Pantry heroes", items: ["olive oil", "lemon", "garlic", "soy sauce", "vinegar", "canned tomatoes", "chili flakes"] }
+];
+
+/* Stock-your-pantry guide — assemble a kitchen by the four elements, shelf by shelf.
+ * Keep one of each element on hand and you can balance almost anything you cook. */
+HAF.pantryShelves = [
+  {
+    el: "salt", name: "Salt", tagline: "Seasoning & savory depth — the volume knob for every other flavor.",
+    groups: [
+      { label: "Everyday", items: ["kosher salt", "flaky sea salt", "black pepper"] },
+      { label: "Savory boosters", items: ["soy sauce", "miso", "fish sauce", "parmesan", "anchovies", "capers", "olives", "stock"] }
+    ]
+  },
+  {
+    el: "fat", name: "Fat", tagline: "Richness, crispness, and the carrier that spreads flavor around.",
+    groups: [
+      { label: "Oils", items: ["olive oil", "a neutral oil", "toasted sesame oil"] },
+      { label: "Rich & creamy", items: ["butter", "coconut milk", "tahini", "mayonnaise", "nuts", "a hard cheese"] }
+    ]
+  },
+  {
+    el: "acid", name: "Acid", tagline: "Brightness and balance — the thing that cuts through richness.",
+    groups: [
+      { label: "The vinegar shelf", items: ["red wine vinegar", "rice vinegar", "apple cider vinegar", "balsamic"] },
+      { label: "Citrus & tang", items: ["lemons", "limes", "dijon mustard", "yogurt", "canned tomatoes", "pickles"] }
+    ]
+  },
+  {
+    el: "heat", name: "Heat", tagline: "Warmth and fire — build a chile shelf and dial the level to taste.",
+    chile: [
+      { level: "Mild", flames: 1, items: ["sweet paprika", "aleppo pepper"] },
+      { level: "Medium", flames: 2, items: ["chili flakes", "jalapeño", "gochujang", "smoked paprika"] },
+      { level: "Hot", flames: 3, items: ["cayenne", "hot sauce", "serrano", "thai chile"] }
+    ],
+    note: "In Salt, Fat, Acid, Heat, heat is really the cooking method — but a stocked chile-and-spice shelf lets you build warmth and depth whenever a dish needs a lift."
+  }
 ];
