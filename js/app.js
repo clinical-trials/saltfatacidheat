@@ -434,15 +434,32 @@
       var card = document.createElement("div");
       card.className = "taste";
       card.style.setProperty("--el", "var(--taste-" + t.key + ")");
+      var ph = t.key === "acidic"
+        ? '<div class="ph-strip" title="Acids sit low on the pH scale — the sour, bright end"><span class="ph-bar"></span><span class="ph-marker"></span><span class="ph-nums"><b>0</b><b>7</b><b>14</b></span></div>'
+        : "";
       card.innerHTML =
         '<div class="taste__label">' +
           '<div class="taste__name">' + t.name + "</div>" +
           '<div class="taste__chem">' + t.chem + "</div>" +
           '<div class="taste__role">' + t.role.map(function (r) { return "<span>" + r + "</span>"; }).join("") + "</div>" +
-        "</div>" +
+        "</div>" + ph +
         '<div class="taste__items">' + t.items.map(function (i) { return '<span class="taste__item">' + i + "</span>"; }).join("") + "</div>";
       grid.appendChild(card);
     });
+  }
+
+  // ——— Scroll-reveal (only when motion is welcome)
+  function initReveal() {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var els = document.querySelectorAll("[data-reveal]");
+    if (reduce || !("IntersectionObserver" in window)) return; // leave everything visible
+    els.forEach(function (el) { el.classList.add("reveal"); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (el) { io.observe(el); });
   }
 
   // ——— Boot
@@ -452,4 +469,5 @@
   renderPantryGuide();
   initTheme();
   initVision();
+  initReveal();
 })();

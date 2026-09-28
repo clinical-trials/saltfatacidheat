@@ -454,11 +454,78 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
 .chile-flames { font-size: 12px; }
 .shelf__note { font-size: 12.5px; color: var(--muted); margin: 14px 0 0; border-left: 3px solid var(--el); padding-left: 11px; }
 
+/* ——— Animated Erlenmeyer flask (meter) ——— */
+.lab-flask { position: absolute; top: 16px; right: 16px; width: 56px; height: auto; z-index: 2; transform-origin: 50% 90%; }
+.lab-flask__bub { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .lab-flask { animation: flask-bob 4.5s ease-in-out infinite; }
+  .lab-flask__liquid { animation: liquid-wave 3.6s ease-in-out infinite; }
+  .lab-flask__bub { animation: flask-bubble 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+}
+@keyframes flask-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-4px) rotate(2deg); } }
+@keyframes liquid-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+@keyframes flask-bubble { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 25% { opacity: 0.85; } 100% { transform: translateY(-24px) scale(1); opacity: 0; } }
+
+/* ——— Flavor-lab photo ——— */
+.tl-photo { position: relative; margin: 0 0 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.tl-photo img { display: block; width: 100%; max-height: 360px; object-fit: cover; object-position: center 38%; }
+@media (prefers-reduced-motion: no-preference) { .tl-photo img { animation: kenburns 20s ease-in-out infinite alternate; } }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.06); } }
+.tl-photo figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px; font-size: 13.5px; color: #fff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); font-family: var(--display); font-style: italic;
+}
+
+/* ——— pH strip (acid) ——— */
+.ph-strip { position: relative; margin: 0 0 14px; }
+.ph-bar {
+  display: block; height: 12px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--line);
+  background: linear-gradient(90deg, #e23b2e, #ef7d1a, #f4c430, #8fbf2f, #2fa66b, #2f7fd1, #6b3fb0);
+}
+.ph-marker {
+  position: absolute; top: -3px; left: 16%; transform: translateX(-50%);
+  width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid var(--ink);
+}
+@media (prefers-reduced-motion: no-preference) { .ph-marker { animation: ph-pulse 2s ease-in-out infinite; } }
+@keyframes ph-pulse { 0%, 100% { top: -3px; } 50% { top: -6px; } }
+.ph-nums { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 3px; font-weight: 700; }
+
+/* ——— Cute motion: bobbing food + chip hover ——— */
+@media (prefers-reduced-motion: no-preference) {
+  .food-parade__item { animation: food-bob 3.6s ease-in-out infinite; }
+  .food-parade__item:nth-child(2) { animation-delay: 0.45s; }
+  .food-parade__item:nth-child(3) { animation-delay: 0.9s; }
+  .food-parade__item:nth-child(4) { animation-delay: 1.35s; }
+  .food-parade__item:nth-child(5) { animation-delay: 1.8s; }
+  .food-parade__item:nth-child(6) { animation-delay: 2.25s; }
+  .chip { transition: transform 0.15s ease; }
+  .chip:hover { transform: translateY(-2px) rotate(-1.5deg); }
+}
+@keyframes food-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* ——— Scroll reveal ——— */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* ——— Meet the maker ——— */
+.maker { margin-top: 44px; }
+.maker__card {
+  display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
+  background: linear-gradient(120deg, rgba(224, 26, 121, 0.07), var(--surface) 55%);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 28px clamp(22px, 4vw, 40px); box-shadow: var(--shadow);
+}
+.maker__avatar svg { width: 96px; height: 96px; display: block; }
+.maker__body h2 { font-family: var(--display); font-weight: 900; font-size: clamp(24px, 3.6vw, 34px); letter-spacing: -0.02em; margin: 0 0 10px; }
+.maker__body p { margin: 0; color: var(--muted); font-size: 16px; max-width: 62ch; }
+.maker__body p b { color: var(--ink); }
+.maker__sig { margin-top: 12px !important; font-family: var(--display); font-style: italic; color: var(--fuchsia-deep) !important; }
+:root[data-theme="dark"] .maker__sig { color: var(--fuchsia-soft) !important; }
+
 /* ——— Responsive ——— */
 @media (max-width: 820px) {
   body { overflow-x: hidden; }
   .workbench { grid-template-columns: 1fr; }
-  .panel--meter { position: static; }
+  .panel--meter { position: relative; }
   .tube { height: 158px; }
   .move { grid-template-columns: 60px 1fr; gap: 12px; }
   .taste-grid { grid-template-columns: repeat(2, 1fr); }
@@ -476,6 +543,11 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
   .pg-top { grid-template-columns: 1fr; }
   .pantry-illo { max-width: 320px; width: min(320px, 84%); margin: 6px auto 0; }
   .taste-grid { grid-template-columns: 1fr; }
+  .tl-photo img { max-height: 240px; }
+  .lab-flask { width: 46px; top: 12px; right: 12px; }
+  .maker__card { grid-template-columns: 1fr; gap: 14px; text-align: center; }
+  .maker__avatar { margin: 0 auto; }
+  .maker__body p { margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 480px) {
   .elements-legend { display: none; }
