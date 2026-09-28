@@ -20,6 +20,14 @@
   --acid: #8fbf2f;
   --heat: #e01a79;
 
+  /* six tastes */
+  --taste-salty: var(--salt);
+  --taste-fatty: var(--fat);
+  --taste-sweet: #dd6098;
+  --taste-acidic: var(--acid);
+  --taste-bitter: #6f7a3e;
+  --taste-umami: #9a5238;
+
   --radius: 18px;
   --shadow: 0 18px 40px -24px rgba(164, 0, 90, 0.5);
   --display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -389,6 +397,30 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
 }
 @keyframes bubble-rise { to { background-position: 0 -46px, 0 -46px, 0 -46px; } }
 
+/* ——— The six tastes (flavor lab) ——— */
+.taste-lab { margin-top: 44px; }
+.tl-head { max-width: 700px; margin-bottom: 22px; }
+.tl-head h2 { font-family: var(--display); font-weight: 900; font-size: clamp(28px, 4.4vw, 40px); letter-spacing: -0.02em; margin: 0 0 8px; }
+.tl-sub { color: var(--muted); font-size: 16px; margin: 0; }
+.tl-sub b { color: var(--ink); }
+.taste-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.taste {
+  border-radius: 16px; padding: 20px; border: 1px solid var(--line); border-top: 4px solid var(--el);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--el) 9%, var(--surface)), var(--surface) 62%);
+  box-shadow: var(--shadow);
+}
+.taste__label {
+  display: inline-block; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 11px 14px; margin-bottom: 14px;
+  box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.35);
+}
+.taste__name { font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--el); }
+.taste[data-el] .taste__name { color: var(--el); }
+.taste__chem { font-size: 12px; letter-spacing: 0.04em; color: var(--muted); font-style: italic; margin: 1px 0 8px; }
+.taste__role { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--ink); border-top: 1px solid var(--line); padding-top: 7px; }
+.taste__items { display: flex; flex-wrap: wrap; gap: 6px; }
+.taste__item { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 5px 11px; font-size: 13px; }
+
 /* ——— Stock-the-pantry guide ——— */
 .pantry-guide { margin-top: 44px; }
 .pg-top { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; margin-bottom: 24px; }
@@ -429,6 +461,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
   .panel--meter { position: static; }
   .tube { height: 158px; }
   .move { grid-template-columns: 60px 1fr; gap: 12px; }
+  .taste-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   .topbar { padding: 14px 18px; }
@@ -442,6 +475,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 56px) 40px
   .shelf-grid { grid-template-columns: 1fr; }
   .pg-top { grid-template-columns: 1fr; }
   .pantry-illo { max-width: 320px; width: min(320px, 84%); margin: 6px auto 0; }
+  .taste-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .elements-legend { display: none; }

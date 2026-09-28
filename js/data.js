@@ -344,3 +344,15 @@ HAF.pantryShelves = [
     note: "In Salt, Fat, Acid, Heat, heat is really the cooking method — but a stocked chile-and-spice shelf lets you build warmth and depth whenever a dish needs a lift."
   }
 ];
+
+/* The six tastes — the flavor-science reference (a "flavor lab" specimen set).
+ * Salt / Fat / Acid overlap with the cooking engine; Sweet / Bitter / Umami round out
+ * the full palette the tongue reads. Chemistry + role mirror the flavor-lab reference. */
+HAF.tastes = [
+  { key: "salty",  name: "Salty",  chem: "NaCl",          role: ["Enhances flavor", "Controls moisture"],  items: ["sea salt", "anchovies", "olives", "soy sauce", "miso", "capers"] },
+  { key: "fatty",  name: "Fatty",  chem: "Triglycerides", role: ["Adds richness", "Carries flavor"],        items: ["olive oil", "butter", "avocado", "cheese", "nuts", "cream"] },
+  { key: "sweet",  name: "Sweet",  chem: "Sugars",        role: ["Balances flavor", "Provides energy"],     items: ["honey", "berries", "caramelized onion", "maple", "roasted squash"] },
+  { key: "acidic", name: "Acidic", chem: "Organic acids", role: ["Brightens flavor", "Balances taste"],     items: ["lemon", "vinegar", "yogurt", "tomato", "wine", "pickles"] },
+  { key: "bitter", name: "Bitter", chem: "Alkaloids",     role: ["Adds complexity", "Stimulates appetite"], items: ["dark chocolate", "cocoa", "kale", "coffee", "radicchio", "citrus peel"] },
+  { key: "umami",  name: "Umami",  chem: "Glutamates",    role: ["Enhances savoriness", "Adds depth"],      items: ["parmesan", "mushrooms", "tomato paste", "fish sauce", "cured meat", "seaweed"] }
+];

@@ -426,9 +426,29 @@
     });
   }
 
+  // ——— The six tastes (flavor-lab reference)
+  function renderTasteLab() {
+    var grid = $("tasteGrid");
+    if (!grid || !HAF.tastes) return;
+    HAF.tastes.forEach(function (t) {
+      var card = document.createElement("div");
+      card.className = "taste";
+      card.style.setProperty("--el", "var(--taste-" + t.key + ")");
+      card.innerHTML =
+        '<div class="taste__label">' +
+          '<div class="taste__name">' + t.name + "</div>" +
+          '<div class="taste__chem">' + t.chem + "</div>" +
+          '<div class="taste__role">' + t.role.map(function (r) { return "<span>" + r + "</span>"; }).join("") + "</div>" +
+        "</div>" +
+        '<div class="taste__items">' + t.items.map(function (i) { return '<span class="taste__item">' + i + "</span>"; }).join("") + "</div>";
+      grid.appendChild(card);
+    });
+  }
+
   // ——— Boot
   renderQuickAdd();
   renderPantry();
+  renderTasteLab();
   renderPantryGuide();
   initTheme();
   initVision();
